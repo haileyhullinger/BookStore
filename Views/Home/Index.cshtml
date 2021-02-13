@@ -1,0 +1,28 @@
+﻿@{
+    ViewBag.Title = "Book Store";
+}
+<!--bring in model-->
+@model IQueryable<Book>
+<header class="text-center">
+    <h1> Welcome to the Book Store</h1>
+    <p>Here is a list of Spencer Hilton's Favorite books that we recommend!</p>
+</header>
+
+<!--loop through data to display-->
+<div class="text-center">
+    @foreach (var x in Model)
+    {
+        <div class="card">
+            <div class="card-body">
+                <h2 class="text-danger">@x.Title</h2>
+                <p>Written by: @x.Author</p>
+                <p>Published by: @x.Publisher</p>
+                <p>ISBN: @x.ISBN</p>
+                <p>@x.Classification</p>
+                <p>Price: $@x.Price</p>
+            </div>
+        </div>
+    }
+
+</div>
+
