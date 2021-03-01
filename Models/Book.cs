@@ -25,6 +25,9 @@ namespace BookStore.Models
         public string ISBN { get; set; }
         [Required]
         public string Classification { get; set; }
+        //Price added to model
+        [Required]
+        public int Pages { get; set; }
         [Required]
         public double Price { get; set; }
     }

@@ -1,0 +1,23 @@
+﻿@model Book
+<!--loop through data to display class="text-center"-->
+
+<div class="row">
+    <div class="card m-1 p-5" style="width: 25rem">
+        <div p-1">
+            <h2 class="text-danger">
+                @Model.Title
+                <span class="badge badge-pill badge-primary" style="float:right">
+                    $@Model.Price
+                </span>
+
+            </h2>
+            <p>By @Model.Author</p>
+            <p>Published by: @Model.Publisher</p>
+            <p>ISBN: @Model.ISBN</p>
+            <p>@Model.Classification</p>
+            <p>Number of Pages: @Model.Pages</p>
+        </div>
+    </div>
+</div>
+
+

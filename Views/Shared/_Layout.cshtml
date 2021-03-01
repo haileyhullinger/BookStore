@@ -4,12 +4,31 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewBag.Title</title>
+
+    <!--bootstrap link applied to shared layout screen so it will apply to every page-->
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 
     <link rel="icon" type="image/png" src="~/book3.ico" />
 </head>
 <body>
+
+    <!--the black band across the top of all pages that use shared layout-->
+    <div class="bg-dark text-white p-2">
+        <!--makes the text look like a navigation bar with certain styling-->
+        <span class="navbar-brand ml-2">Book Store</span>
+    </div>
+
+    <!--section off the "Welcome to book store" to right hand side-->
+    <div>
+        <div>
+            <h1 class="text-center"> Welcome to the Book Store</h1>
+                <p>Here are some of our FAVORITE books that we recommend! Select a type to view by classification</p>
+            <!--this is from the navigationmenuviewcomponent-->
+            <vc:navigation-menu />
+        </div>
+    </div>
+
     <div>
         @RenderBody()
     </div>

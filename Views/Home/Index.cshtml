@@ -1,28 +1,55 @@
 ﻿@{
     ViewBag.Title = "Book Store";
 }
-<!--bring in model-->
-@model IQueryable<Book>
-<header class="text-center">
-    <h1> Welcome to the Book Store</h1>
-    <p>Here is a list of Spencer Hilton's Favorite books that we recommend!</p>
-</header>
+<!--bring in model, used to be IQueryable<Book> before tag helper-->
+<!--becasue we linked models in the _viewimports we are able to skip the full path and just say booklistviewmodel-->
+@model BookListViewModel
 
-<!--loop through data to display-->
-<div class="text-center">
-    @foreach (var x in Model)
+
+
+
+<!--loop through data to display class="text-center"-->
+<!-- moved to booksummary.cshtml to show just one book at a time
+<div class="row">
+    @foreach (var x in Model.Books)
     {
-        <div class="card">
-            <div class="card-body">
-                <h2 class="text-danger">@x.Title</h2>
-                <p>Written by: @x.Author</p>
-                <p>Published by: @x.Publisher</p>
-                <p>ISBN: @x.ISBN</p>
-                <p>@x.Classification</p>
-                <p>Price: $@x.Price</p>
+        <div class="card m-1 p-3" style="width: 25rem">
+            <div p-1">
+                <h2 class="text-danger">
+                    @x.Title
+                <span class="badge badge-pill badge-primary" style="float:right">
+                    $@x.Price
+                </span>
+
+            </h2>
+            <p>By @x.Author</p>
+            <p>Published by: @x.Publisher</p>
+            <p>ISBN: @x.ISBN</p>
+            <p>@x.Classification</p>
+            <p>Number of Pages: @x.Pages</p>
             </div>
         </div>
     }
-
 </div>
+
+
+    -->
+<!--to pull from partial view-->
+<div class="row">
+        @foreach (var x in Model.Books)
+        {
+            <partial name="BookSummary" model="x" />
+        }
+</div>
+
+    <!--page numbers listed with styling-->
+    <div page-model="@Model.PagingInfo" page-action="Index"
+         page-classes-enabled="true"
+         page-class="btn"
+         page-class-normal="btn-outline-dark"
+         page-class-selected="btn-primary"
+         page-url-classification="@Model.CurrentClassification"
+         class="btn-group pull-right m-1">
+
+    </div>
 

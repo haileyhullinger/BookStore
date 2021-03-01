@@ -57,11 +57,34 @@ namespace BookStore
 
             app.UseAuthorization();
 
+            
             app.UseEndpoints(endpoints =>
             {
+                //endpoint for category/classification
+                //user can specify the classification of the book, and the page number their desire within that category
+                endpoints.MapControllerRoute("classificationpage",
+                    "{classification}/{page:int}",
+                    new { Controller = "Home", action = "Index" });
+
+                // only page given endpoints
+                endpoints.MapControllerRoute("page",
+                    "Books/{page:int}",
+                    new { Controller = "Home", action = "Index" });
+
+                //only classification given enpoints, set page to 1 if user does not specifiy page
+                endpoints.MapControllerRoute("classification",
+                    "{classification}",
+                    new { Controller = "Home", action = "Index" , page = 1});
+
+                //endpoint for page number, this is similar to the other page one but with a different format option for the user
+                //could be in "Books/P{page}" for URL, but I am choosing to use JUST /P{page} in order to access page
                 endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    "pagination",
+                    "/P{page}",
+                    new { Controller = "Home", action = "Index" });
+
+                //default endpoint, if user does not specify anything in the url
+                endpoints.MapDefaultControllerRoute();
             });
 
             //call method
