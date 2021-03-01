@@ -15,6 +15,9 @@ namespace BookStore.Controllers
 
         //added
         private IBookRepository _repository;
+
+        //added for pagination
+        public int PageSize = 5;
         
         //added to receive the IBookRepository
         public HomeController(ILogger<HomeController> logger, IBookRepository repository)
@@ -24,10 +27,34 @@ namespace BookStore.Controllers
             _repository = repository;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string classification, int page = 1)
         {
-            //when view is called, the books will be passed into the view
-            return View(_repository.Books);
+            //when view is called, the books will be passed into the view, based on the items per page
+            //query in a language called LINK
+            return View(new BookStore.Models.ViewModels.BookListViewModel
+            {
+                Books = _repository.Books
+                //when a category is inputted, then it filters. If there is no classification entered, then it wont filter
+                    .Where(p => classification == null || p.Classification == classification)
+                    .OrderBy(p => p.BookId)
+                    .Skip((page - 1) * PageSize)
+                    .Take(PageSize)
+                    ,
+                PagingInfo = new Models.ViewModels.PagingInfo
+                {
+                    CurrentPage = page,
+                    ItemsPerPage = PageSize,
+                    //if the classification is null, count all the books. If a classification is selected, only count the books that match that classification
+                    TotalNumItems = classification == null ? _repository.Books.Count() :
+                                    _repository.Books.Where (x => x.Classification == classification).Count()
+                },
+
+                //like what page is being selected, but this is sorting by a classification of book. can be set in the url (classification = comedy)
+                CurrentClassification = classification
+            }); 
+                
+                
+                
         }
 
         public IActionResult Privacy()

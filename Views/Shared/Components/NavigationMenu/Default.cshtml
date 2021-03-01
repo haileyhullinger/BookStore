@@ -1,0 +1,22 @@
+﻿@model IEnumerable<string>
+
+<!--naviagion for home-->
+
+<div class="btn-group">
+    <a class="btn btn-block btn-outline-secondary" asp-action="Index" asp-controller="Home"
+       asp-route-classification="">
+        Home
+    </a>
+
+    <!--naviagation for each classification-->
+    @foreach (string classification in Model)
+    {
+        <!--if the selected classificaton set in the viewbag matches the category being listed, it is a btn-primary (selected) otherwise it will be a secondary button (not selected-->
+        <a class="btn btn-block @(classification == ViewBag.SelectedClassification ? "btn-primary" : "btn-outline-secondary")"
+           asp-action="Index" asp-controller="Home"
+           asp-route-classification="@classification"
+           asp-route-page="1">
+            @classification
+        </a>
+    }
+</div>
