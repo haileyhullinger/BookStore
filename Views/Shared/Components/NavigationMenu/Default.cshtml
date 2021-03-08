@@ -15,7 +15,7 @@
         <a class="btn btn-block @(classification == ViewBag.SelectedClassification ? "btn-primary" : "btn-outline-secondary")"
            asp-action="Index" asp-controller="Home"
            asp-route-classification="@classification"
-           asp-route-page="1">
+           asp-route-pageNum="1">
             @classification
         </a>
     }

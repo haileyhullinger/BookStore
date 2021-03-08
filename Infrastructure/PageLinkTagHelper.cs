@@ -58,7 +58,7 @@ namespace BookStore.Infrastructure
                 TagBuilder tag = new TagBuilder("a");
 
                 //set what page we are on (to keep track of category)
-                PageUrlValues["page"] = i;
+                PageUrlValues["pageNum"] = i;
 
                 //reference to the next page
                 tag.Attributes["href"] = urlHelper.Action(PageAction, PageUrlValues);

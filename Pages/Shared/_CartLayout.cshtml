@@ -1,0 +1,29 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width-content-width" />
+    <title>Book Store</title>
+
+    <!--bootstrap link-->
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+
+    <!--link for cart icon-->
+    <link href="/lib/font-awesome/css/all.min.css" rel="stylesheet" />
+
+
+</head>
+
+<body>
+    <!--insert cart summary on navigation page-->
+    <div class="bg-dark text-white p-2">
+        <span class="navbar-brand ml-2">Book Store</span>
+    </div>
+
+
+    <div class="m-1 p-1">
+        @RenderBody()
+    </div>
+</body>
+
+</html>

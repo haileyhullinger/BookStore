@@ -1,5 +1,5 @@
 ﻿@model Book
-<!--loop through data to display class="text-center"-->
+
 
 <div class="row">
     <div class="card m-1 p-5" style="width: 25rem">
@@ -17,6 +17,19 @@
             <p>@Model.Classification</p>
             <p>Number of Pages: @Model.Pages</p>
         </div>
+
+        <!--add to cart button information in a form-->
+        <form id="@Model.BookId" asp-page="/Purchase" method="post">
+            <input type="hidden" asp-for="BookId" />
+            <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
+            <span class="card-text p-1">
+                @Model.Title
+                <button type="submit" class="btn-success btn-sm pull-right" style="float:right">
+                    Add to cart
+                </button>
+            </span>
+        </form>
+
     </div>
 </div>
 

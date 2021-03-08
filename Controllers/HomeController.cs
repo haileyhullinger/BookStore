@@ -27,7 +27,7 @@ namespace BookStore.Controllers
             _repository = repository;
         }
 
-        public IActionResult Index(string classification, int page = 1)
+        public IActionResult Index(string classification, int pageNum = 1)
         {
             //when view is called, the books will be passed into the view, based on the items per page
             //query in a language called LINK
@@ -37,12 +37,12 @@ namespace BookStore.Controllers
                 //when a category is inputted, then it filters. If there is no classification entered, then it wont filter
                     .Where(p => classification == null || p.Classification == classification)
                     .OrderBy(p => p.BookId)
-                    .Skip((page - 1) * PageSize)
+                    .Skip((pageNum - 1) * PageSize)
                     .Take(PageSize)
                     ,
                 PagingInfo = new Models.ViewModels.PagingInfo
                 {
-                    CurrentPage = page,
+                    CurrentPage = pageNum,
                     ItemsPerPage = PageSize,
                     //if the classification is null, count all the books. If a classification is selected, only count the books that match that classification
                     TotalNumItems = classification == null ? _repository.Books.Count() :

@@ -9,25 +9,37 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 
-    <link rel="icon" type="image/png" src="~/book3.ico" />
+    <!--link for cart icon-->
+    <link href="/lib/font-awesome/css/all.min.css" rel="stylesheet" />
+
 </head>
 <body>
 
     <!--the black band across the top of all pages that use shared layout-->
+    <!--view cart summary-->
     <div class="bg-dark text-white p-2">
-        <!--makes the text look like a navigation bar with certain styling-->
-        <span class="navbar-brand ml-2">Book Store</span>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col navbar-brand">Book Store</div>
+                <div class="col-6 text-right">
+                    <vc:cart-summary />
+                </div>
+            </div>
+        </div>
     </div>
 
-    <!--section off the "Welcome to book store" to right hand side-->
     <div>
         <div>
             <h1 class="text-center"> Welcome to the Book Store</h1>
-                <p>Here are some of our FAVORITE books that we recommend! Select a type to view by classification</p>
-            <!--this is from the navigationmenuviewcomponent-->
-            <vc:navigation-menu />
+            <p>Here are some of our FAVORITE books that we recommend! Select a type to view by classification</p>
         </div>
     </div>
+
+    <!--this is from the navigationmenuviewcomponent-->
+    <vc:navigation-menu />
+
+
+
 
     <div>
         @RenderBody()
